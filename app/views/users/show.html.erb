@@ -1,0 +1,33 @@
+<h2 class="text-center"><%= @user.name %>さんのページ</h2>
+
+<div class="d-flex justify-content-center">
+  <div class="col-md-6">
+
+    <div class="text-center mb-4">
+      <% if @user.profile_image.present? %>
+        <%= image_tag @user.profile_image.url, alt: "プロフィール写真", class: "rounded-circle img-fluid", style: "width: 150px; height: 150px; object-fit: cover;" %>
+      <% else %>
+        <p>プロフィール写真が設定されていません。</p>
+      <% end %>
+    </div>
+
+    <ul class="list-group">
+      <li class="list-group-item">
+        <strong>お名前：</strong>
+        <%= @user.name %>
+      </li>
+      <li class="list-group-item">
+        <strong>メールアドレス：</strong>
+        <%= @user.email %>
+      </li>
+      <li class="list-group-item">
+        <strong>自己紹介：</strong>
+        <%= @user.bio.present? ? @user.bio : "自己紹介が設定されていません。" %>
+      </li>
+    </ul>
+
+    <div class="text-center mt-4">
+      <%= link_to "編集", edit_user_path(@user), class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
