@@ -1,9 +1,8 @@
 require "test_helper"
 
-class UsersControllerTest < ActionDispatch::IntegrationTest
-
+class EventsControllerTest < ActionDispatch::IntegrationTest
   test "should get new" do
-    get signup_path
+    get new_user_event_path
     assert_response :success
   end
 end
