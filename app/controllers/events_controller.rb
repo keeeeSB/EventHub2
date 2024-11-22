@@ -7,6 +7,8 @@ class EventsController < ApplicationController
 
   def new
     @event = current_user.events.build
+    @category = Category.new
+    @categories = Category.all
   end
 
   def create
