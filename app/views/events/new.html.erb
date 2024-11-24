@@ -2,7 +2,8 @@
 
 <div class="d-flex justify-content-center">
   <div class="col-md-6">
-    <%= form_with(model: @event, url: new_user_event_path, local: true) do |f| %>
+    <%= form_with(model: @event, url: user_events_path(current_user), local: true) do |f| %>
+      <%= render "shared/error_messages", object: @event %>
 
       <div class="mb-3">
         <%= f.label :title, "タイトル", class: "form-label" %>
@@ -29,7 +30,8 @@
         <%= f.collection_select :category_id, @categories, :id, :name, { prompt: "" }, { class: "form-control" } %>
       </div>
 
-      <p class="m-3 text-center">or</p>
+      <p class="m-2 text-center">or</p>
+
       <%= form_with(model: @category, url: categories_path, local: true) do |category_form| %>
         <div class="mb-4">
           <%= category_form.label :name, "カテゴリーを作成", class: "form-label" %>
