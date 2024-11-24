@@ -7,12 +7,16 @@ class EventsController < ApplicationController
 
   def new
     @event = current_user.events.build
-    @category = Category.new
+    @event.build_category
     @categories = Category.all
   end
 
   def create
-    @event = current_user.events.build(event_params)
+    if event_params[:category_id].present?
+      @event = current_user.events.build(event_params.except(:category_attributes))
+    else
+      @event = current_user.events.build(event_params)
+    end    
     if @event.save
       flash[:success] = "イベントを作成しました。"
       redirect_to root_path
@@ -48,10 +52,10 @@ class EventsController < ApplicationController
 
     def event_params
       params.require(:event).permit(:title, :description, :start_time,
-                                    :location, :category_id)
+                                    :location, :category_id, category_attributes: [:name])
     end
 
     def set_event
-      @event = current_user.events.find(params[:id])
+      @event = Event.find(params[:id])
     end
 end
