@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :require_login, only: [:new]
+  before_action :require_login, only: [:new, :create]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -30,7 +30,7 @@ class EventsController < ApplicationController
 
   def update
     if @event.update(event_params)
-      falsh[:success] = "イベント情報を更新しました。"
+      flash[:success] = "イベント情報を更新しました。"
       redirect_to root_path
     else
       flash.now[:danger] = "イベント情報を更新できませんでした。"
@@ -47,10 +47,11 @@ class EventsController < ApplicationController
   private
 
     def event_params
-      params.require(:event).permit(:title, :description, :start_time, :location)
+      params.require(:event).permit(:title, :description, :start_time,
+                                    :location, :category_id)
     end
 
     def set_event
-      @events = current_user.events.find(params[:id])
+      @event = current_user.events.find(params[:id])
     end
 end
