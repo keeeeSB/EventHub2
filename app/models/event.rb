@@ -8,4 +8,9 @@ class Event < ApplicationRecord
   validates :description, presence: true
   validates :start_time,  presence: true
   validates :location,    presence: true
+
+  # 開催前のイベント
+  scope :upcoming, -> { where("start_time > ?", Time.current).order(start_time: :asc) }
+  # 開催後のイベント
+  scope :past, -> { where("start_time <= ?", Time.current).order(start_time: :desc) }
 end

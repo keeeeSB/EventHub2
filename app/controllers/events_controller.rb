@@ -3,6 +3,8 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def index
+    @upcoming_events = Event.upcoming
+    @pasts_events    = Event.past
   end
 
   def new

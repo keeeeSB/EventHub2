@@ -1,0 +1,33 @@
+<h2 class="text-center">未開催イベントの一覧</h2>
+
+<div class="d-flex justify-content-center">
+  <div class="col-md-6">
+    <% if @upcoming_events.present? %>
+      <% @upcoming_events.each do |event| %>
+        <div class="card mb-3 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">
+              <%= event.title %>
+            </h5>
+
+            <p class="card-text">
+              <%= truncate(event.description, length: 100) %>
+            </p>
+
+            <p class="card-text">
+              <small class="text-muted">開催日時: <%= event.start_time.strftime("%Y年%m月%d日 %H:%M") %></small>
+            </p>
+
+            <p class="card-text">
+              <small class="text-muted">場所: <%= event.location %></small>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="alert alert-info text-center">
+        現在、開催予定のイベントはありません。
+      </div>
+    <% end %>
+  </div>
+</div>
