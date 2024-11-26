@@ -2,9 +2,13 @@ class EventsController < ApplicationController
   before_action :require_login, only: [:new, :create]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @upcoming_events = Event.upcoming
-    @pasts_events    = Event.past
+  def upcoming
+    @upcoming_events = Event.upcoming.includes(:user, :category)
+    @users = User.all
+  end
+
+  def past
+    @pasts_events = Event.past
   end
 
   def new
