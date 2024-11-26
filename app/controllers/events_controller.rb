@@ -32,6 +32,8 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @event.build_category
+    @categories = Category.all
   end
 
   def update
