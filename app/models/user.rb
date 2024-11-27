@@ -3,6 +3,7 @@ class User < ApplicationRecord
   mount_uploader :profile_image, ProfileImageUploader
 
   has_many :events, dependent: :destroy
+  has_many :joins,  dependent: :destroy
 
   validates :name,     presence: true
   validates :email,    presence: true, uniqueness: true
