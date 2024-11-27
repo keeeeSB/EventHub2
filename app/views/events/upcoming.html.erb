@@ -1,7 +1,7 @@
 <h2 class="text-center mb-5">未開催イベントの一覧</h2>
 
 <div class="text-center mb-4">
-  <%= link_to "開催済みのイベントはこちら", past_user_events_path(@users), class: "btn btn-outline-primary" %>
+  <%= link_to "開催済みのイベントはこちら", past_user_events_path(@users), class: "btn btn-outline-secondary" %>
 </div>
 
 <div class="d-flex justify-content-center">
@@ -10,6 +10,17 @@
       <% @upcoming_events.each do |event| %>
         <div class="card mb-3 shadow-sm">
           <div class="card-body">
+          <% if current_user.joins.exists?(event_id: event.id) %>
+            <%= link_to "参加取り消し", user_event_join_path(current_user, event, current_user.joins.find_by(event_id: event.id)),
+                        data: { turbo_method: :delete },
+                        class: "btn btn-danger btn-sm", 
+                        style: "position: absolute; top: 10px; right: 10px;" %>
+          <% else %>
+            <%= link_to "参加申し込み", user_event_joins_path(current_user, event),
+                        data: { turbo_method: :post },
+                        class: "btn btn-outline-success btn-sm", 
+                        style: "position: absolute; top: 10px; right: 10px;" %>
+          <% end %>
             <h5 class="card-title fw-bold">
               <%= event.title %>
             </h5>
