@@ -8,52 +8,10 @@
   <div class="col-md-6">
     <% if @upcoming_events.present? %>
       <% @upcoming_events.each do |event| %>
-        <div class="card mb-3 shadow-sm">
-          <div class="card-body">
-          <% if current_user.joins.exists?(event_id: event.id) %>
-            <%= link_to "参加取り消し", user_event_join_path(current_user, event, current_user.joins.find_by(event_id: event.id)),
-                        data: { turbo_method: :delete },
-                        class: "btn btn-danger btn-sm", 
-                        style: "position: absolute; top: 10px; right: 10px;" %>
-          <% else %>
-            <%= link_to "参加申し込み", user_event_joins_path(current_user, event),
-                        data: { turbo_method: :post },
-                        class: "btn btn-outline-success btn-sm", 
-                        style: "position: absolute; top: 10px; right: 10px;" %>
-          <% end %>
-            <h5 class="card-title fw-bold">
-              <%= event.title %>
-            </h5>
-
-            <p class="card-text">
-              <%= truncate(event.description, length: 100) %>
-            </p>
-
-            <p class="card-text">
-              <small class="text-muted fw-bold">開催日時: </small>
-              <%= event.start_time.strftime("%Y年%m月%d日 %H:%M") %>
-            </p>
-
-            <p class="card-text">
-              <small class="text-muted fw-bold">場所: </small>
-              <%= event.location %>
-            </p>
-
-            <p class="card-text">
-              <small class="text-muted fw-bold">カテゴリー: </small>
-              <span class="text-primary fw-bold"><%= event.category.name %></span>
-            </p>
-
-            <% if event.user_id == current_user.id %>
-              <%= link_to "編集", edit_user_event_path(event.user, event), class: "btn btn-warning btn-sm" %>
-              <%= link_to "削除", user_event_path(event.user, event), data: { "turbo-method": :delete,
-                                                                              turbo_confirm: "本当に削除しますか" }, class: "btn btn-danger btn-sm" %>
-            <% end %>
-          </div>
-        </div>
+        <%= render "shared/event_card", event: event %>
       <% end %>
     <% else %>
-      <div class="alert alert-info text-center">
+      <div class="text-center">
         現在、開催予定のイベントはありません。
       </div>
     <% end %>

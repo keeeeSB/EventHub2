@@ -11,9 +11,11 @@ Rails.application.routes.draw do
         get "upcoming"
         get "past"
       end
-      resources :joins, only: [:create, :destroy]
+      resources :joins,     only: [:create, :destroy]
+      resources :favorites, only: [:create, :destroy]
     end
-    resources :joins, only: [:index]
+    resources :joins,     only: [:index]
+    resources :favorites, only: [:index]
   end
   resources :categories, only: [:create]
 end

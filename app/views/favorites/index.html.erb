@@ -1,14 +1,14 @@
-<h2 class="text-center mb-5">参加予定イベントの一覧</h2>
+<h2 class="text-center mb-5">お気に入りイベントの一覧</h2>
 
 <div class="d-flex justify-content-center">
   <div class="col-md-6">
-    <% if @join_events.present? %>
-      <% @join_events.each do |event| %>
+    <% if @favorite_events.present? %>
+      <% @favorite_events.each do |event| %>
         <%= render "shared/event_card", event: event %>
       <% end %>
     <% else %>
       <div class="text-center">
-        現在、参加予定のイベントはありません。
+        現在、お気に入りのイベントはありません。
       </div>
     <% end %>
   </div>
