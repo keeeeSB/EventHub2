@@ -2,7 +2,7 @@ class FavoritesController < ApplicationController
   before_action :require_login
 
   def index
-    @favorite_events = current_user.favorites.include(:event).order('events.start_time ASC').map(&:event)
+    @favorite_events = current_user.favorites.includes(:event).order('events.start_time ASC').map(&:event)
   end
 
   def create
