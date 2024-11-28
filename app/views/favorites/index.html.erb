@@ -1,2 +1,15 @@
-<h1>Favorites#index</h1>
-<p>Find me in app/views/favorites/index.html.erb</p>
+<h2 class="text-center mb-5">お気に入りイベントの一覧</h2>
+
+<div class="d-flex justify-content-center">
+  <div class="col-md-6">
+    <% if @favorite_events.present? %>
+      <% @join_events.each do |event| %>
+        <%= render "shared/event_card", event: event %>
+      <% end %>
+    <% else %>
+      <div class="text-center">
+        現在、お気に入りのイベントはありません。
+      </div>
+    <% end %>
+  </div>
+</div>
