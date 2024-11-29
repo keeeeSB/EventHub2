@@ -1,0 +1,10 @@
+<h1>EventHub</h1>
+
+<p>こんにちは <%= @user.name %>さん,</p>
+
+<p>
+ようこそ、EventHubアプリへ! こちらをクリックしてアカウントを認証してください。 account:
+</p>
+
+<%= link_to "認証", edit_account_activation_url(@user.activation_token,
+                                                    email: @user.email) %>
