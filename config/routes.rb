@@ -18,4 +18,5 @@ Rails.application.routes.draw do
     resources :favorites, only: [:index]
   end
   resources :categories, only: [:create]
+  resources :account_activations, only: [:edit]
 end
